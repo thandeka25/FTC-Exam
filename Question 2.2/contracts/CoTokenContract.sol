@@ -1,30 +1,41 @@
 pragma solidity ^0.5.0;
 
-import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
-import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
+//import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
+//import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/ownership/Ownable.sol";
 
 
 contract CoToken is Ownable, ERC20 {
-    uint256 constant public decimals = 10**18;
     uint public totsupply;
+    uint public tokenBuyPrice_;
+    uint public tokenSellPrice_;
 
-    function buyPrice (uint _tokensupply, uint num) public returns(uint) {
-        uint tokenprice = ((_tokensupply /100) + (2/10)) * decimals;
+    function buyPrice () public returns(uint) {
+        tokenBuyPrice_ = (totsupply * 10**16)  + (2*10**17);
         //tokensupply.add(num);
-        return tokenprice;
+        return tokenBuyPrice_;
     }
 
-    function mint (uint256 amount) public {
+    function mint (uint256 amount) public payable {
+        require(msg.value >= buyPrice()*amount);
         _mint(msg.sender, amount);
         totsupply = totsupply + amount;
     }
 
-    function sellPrice (uint _tokensupply) public returns (uint) {
-        uint tokenprice = ((_tokensupply /100) + (2/10)) * decimals;
+    function sellPrice () public returns (uint) {
+        tokenSellPrice_ = (totsupply * 10**16)  + (2*10**17);
+        return tokenSellPrice_;
     }
     
-    function burn(uint _numtokens, uint _amount) payable public {
-        require(msg.value >= buyprice (_amount));
+    function burn(uint _n) payable public {
+        require(msg.value >= sellPrice ()*_n);
+        //mint(_n);
+        totsupply = totsupply - _n;
+    }
+    
+    function destroy () public onlyOwner {
+        selfdestruct(msg.sender);
     }
 
 

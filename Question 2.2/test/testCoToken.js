@@ -1,15 +1,15 @@
-const CoShoe = artifacts.require('CoShoe')
+const CotOKEN = artifacts.require('CoToken');
+const Erc20 = artifacts.require("./ERC20.sol");
 
-contract('CoShoe', function (accounts) {
+contract('CoToken', function (accounts) {
   // predefine parameters
-  const owner = 'Cool Song'
-  const name = 'example.com'
-  const image = 'example.com'
-  const sold = 'true'
+  let sellPrice = 0;
+  let buyPrice = ;
+  const totSupply = ;
   //const songPrice = web3.utils.toWei('1', 'ether')
 
-  it('should contain zero shoes in the beginning', async function () {
-    // fetch instance of SongRegistry contract
+  it('should contain zero tokens in the beginning', async function () {
+    // fetch instance of CoToken contract
     let CoShoeInstance = await CoShoe.deployed()
     // get the number of songs
     let shoeCounter = await CoShoeInstance.getNumberOfSongs()
@@ -67,3 +67,5 @@ contract('CoShoe', function (accounts) {
     assert.equal(account0NewBalance, Number(account0InitialBalance) + Number(songPrice), 'Account 0 was paid by account 1')
   })
 })
+
+
