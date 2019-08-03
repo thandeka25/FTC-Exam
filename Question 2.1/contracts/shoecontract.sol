@@ -14,7 +14,7 @@ contract CoShoe {
   Shoe [] public shoes;
   
   constructor {
-    shoes.push(Shoe(msg.sender, "", "", false));
+    shoes.push(Shoe(msg.sender, " ", " ", false));
   }
   
   function buyShoe payable external (string _name, string _image) {
