@@ -37,6 +37,4 @@ contract('CoToken', function (accounts) {
     assert.equal(shoeCounter, 0, 'initial number not equal to zero')
   }),
 
-
-
 })
