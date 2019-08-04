@@ -6,6 +6,7 @@ contract('CoShoe', function (accounts) {
   const random_address = accounts[1];
   const eg_image = "theimage.com";
   
+  //predefining parameters for our struct
   const validateShoe = {
     name: '',
     image: '',
@@ -17,7 +18,7 @@ contract('CoShoe', function (accounts) {
 
   //start off without any shoes
   let num_shoes = 0;
-  let prize = 1;
+  let price = 1;
 
   /** 
   it('should contain zero shoes in the beginning', async function () {
@@ -29,22 +30,23 @@ contract('CoShoe', function (accounts) {
     //assert.equal(shoeCounter, 0, 'initial number not equal to zero')
   }) */
 
-  context ("Buy Another Shoe", function () {
+  context ("Create a digital twin of the shoe", function () {
   it('transfers ownership correctly', async function () => {
+    //create an instance of a CoShoe contract
     let CoShoeInstance = await CoShoe.deployed()
     // register a song from account 0
     await CoShoeInstance.buyShoe(validShoe.name, validShoe.image, {
       from: shoeOwner
     })
     // retrieve the shoes details
-    let shoe = await CoShoeInstance.shoes()
+    let shoe = await CoShoeInstance.shoes(0)
   
     // check that they match the original shoe details
-    assert.equal(shoe['owner'], shoeOwner, 'owner does not match')
-    assert.equal(shoe['name'], validShoe.name, 'name does not match')
-    assert.equal(shoe['image'], validShoe.image, 'image url does not match')
-    assert.equal(shoe.sold, false, 'no change in status')
+    assert.equal(shoe['owner'], FootOwner, 'owner does not match')
+    assert.equal(shoe['name'], validateShoe.name, 'name does not match')
+    assert.equal(shoe['image'], validateShoe.image, 'image url does not match')
     assert.equal(validShoe.price, price, "Insufficient funds")
+    assert.equal(shoe.sold, true, 'no change in status')
     num_shoes += 1;
     console.log(num_shoes)
   })

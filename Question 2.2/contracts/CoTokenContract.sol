@@ -12,7 +12,7 @@ contract CoToken is Ownable, ERC20 {
     uint public tokenBuyPrice_;
     uint public tokenSellPrice_;
 
-    function buyPrice () public returns(uint) {
+    function buyPrice () public view returns(uint) {
         tokenBuyPrice_ = (totsupply * 10**16)  + (2*10**17);
         //tokensupply.add(num);
         return tokenBuyPrice_;
@@ -43,7 +43,7 @@ contract CoToken is Ownable, ERC20 {
         totsupply = totsupply + amount;
     }
 
-    function sellPrice () public returns (uint) {
+    function sellPrice () public view returns (uint) {
         tokenSellPrice_ = (totsupply * 10**16)  + (2*10**17);
         return tokenSellPrice_;
     }
