@@ -35,10 +35,8 @@ contract('CoToken', function (accounts) {
     let tokenCounter = await CoTokenInstance.getNumberOfSongs()
     // check that there are no songs initially
     assert.equal(shoeCounter, 0, 'initial number not equal to zero')
-  })
+  }),
 
 
 
 })
-
-
