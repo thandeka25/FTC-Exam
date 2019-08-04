@@ -35,6 +35,7 @@ contract CoToken is Ownable, ERC20 {
     }
     
     function destroy () public onlyOwner {
+        //require(totsupply[msg.sender] == 100, "owner does not have all the tokens"); //check that the owner is in possession of all the tokens
         selfdestruct(msg.sender);
     }
 
