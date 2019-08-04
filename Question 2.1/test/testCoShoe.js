@@ -37,7 +37,7 @@ contract('CoShoe', function (accounts) {
     let token_count = await CoShoeInstance.viewTokenCount()
     //make sure the tokens are equal to 100
     assert.equal(viewTokenCount, 100, 'did not mint 100 tokens on deployment')
-  }
+  },
 
 
   context ("Create a digital twin of the shoe", function () {
