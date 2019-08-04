@@ -30,6 +30,16 @@ contract('CoShoe', function (accounts) {
     //assert.equal(shoeCounter, 0, 'initial number not equal to zero')
   }) */
 
+  it("should mint 100 tokens when contract is deployed", async () => {
+    //create an instance of a CoShoe contract
+    let CoShoeInstance = await CoShoe.deployed()
+    // view the number of tokens deployed
+    let token_count = await CoShoeInstance.viewTokenCount()
+    //make sure the tokens are equal to 100
+    assert.equal(viewTokenCount, 100, 'did not mint 100 tokens on deployment')
+  }
+
+
   context ("Create a digital twin of the shoe", function () {
   it('transfers ownership correctly', async function () => {
     //create an instance of a CoShoe contract
@@ -51,10 +61,11 @@ contract('CoShoe', function (accounts) {
     console.log(num_shoes)
   })
 
+  //check the purchases 
   it('should return the correct number of trues', async () => {
     let CoShoeInstance = await CoShoe.deployed()
     // call the checkPur function 
-    let checkPurchase = await CoShoeInstance.checkPur()
+    let checkPurchase = await CoShoeInstance.checkPurchases()
  
   })
 
