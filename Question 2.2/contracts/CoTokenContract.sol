@@ -6,8 +6,8 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contr
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/ownership/Ownable.sol";
 
 
-
 contract CoToken is Ownable, ERC20 {
+    
     uint public totsupply;  //current number of tokens available
     uint public tokenBuyPrice_;
     uint public tokenSellPrice_;
@@ -35,7 +35,6 @@ contract CoToken is Ownable, ERC20 {
         return tokenBuyPrice_
     }
     */
-
 
     function mint (uint256 amount) public payable {
         require(msg.value >= buyPrice()*amount);
