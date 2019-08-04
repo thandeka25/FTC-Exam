@@ -49,7 +49,7 @@ Shoe[] public shoes; //holds all the shoes instances
 
   function checkPurchases () external view returns(bool[] memory) {
     bool[] memory checkPur;
-    for ( uint i=0; i < shoes.length; i++ ) {
+    for ( uint i = 0; i < shoes.length; i++ ) {
       if (shoes[i].owner == msg.sender) {
         checkPur[i] = true;
       }
