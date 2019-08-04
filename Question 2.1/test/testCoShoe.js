@@ -1,4 +1,4 @@
-const CoShoe = artifacts.require('CoShoe.sol')
+const CoShoe = artifacts.require('CoShoe')
 
 contract('CoShoe', function (accounts) {
   // predefine parameters
