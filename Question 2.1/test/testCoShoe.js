@@ -41,11 +41,11 @@ contract('CoShoe', function (accounts) {
 
 
   context ("Create a digital twin of the shoe", function () {
-  it('transfers ownership correctly', async function () => {
+  it('transfers ownership correctly', async function ()  {
     //create an instance of a CoShoe contract
     let CoShoeInstance = await CoShoe.deployed()
     // register a song from account 0
-    await CoShoeInstance.buyShoe(validShoe.name, validShoe.image, {
+    await CoShoeInstance.buyShoe(validateShoe.name, validateShoe.image, {
       from: shoeOwner
     })
     // retrieve the shoes details
@@ -55,9 +55,9 @@ contract('CoShoe', function (accounts) {
     assert.equal(shoe['owner'], FootOwner, 'owner does not match')
     assert.equal(shoe['name'], validateShoe.name, 'name does not match')
     assert.equal(shoe['image'], validateShoe.image, 'image url does not match')
-    assert.equal(validShoe.price, price, "Insufficient funds")
+    assert.equal(validateShoe.price, price, "Insufficient funds")
     assert.equal(shoe.sold, true, 'no change in status')
-    num_shoes += 1;
+    num_shoes += 1
     console.log(num_shoes)
   })
 
