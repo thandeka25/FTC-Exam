@@ -9,21 +9,28 @@ contract CoShoe {
   }
 
   uint price = 500000000000000000;
-  uint shoesSold = 0;
-  uint allShoes = 0;
-  uint initial_supply = 100; //initial number of tokens to be created;
+  uint shoesSold = 0; //number of shoes sold
+  uint allShoes = 0; //number of shoes
+  uint initial_supply = 100; //initial number of tokens to be created
   //uint numShoes = 0;
 
-  //mint 100 tokebs at the beginning
+  //mint 100 tokens at the beginning
   constructor () public {
-    _mint(msg.sender, initial_supply)
-  }
+    for (uint i = 1; i <= initial_supply; i++ ){
+      Shoe [] public shoes;
 
-  Shoe [] public shoes;
-  
-  constructor public {
-    shoes.push(Shoe(msg.sender, " ", " ", false));
-    allShoes = allShoes + 1;
+      shoes[i].owner = msg.sender;
+      shoes[i].name = " ";
+      shoes[i].image = " ";
+      shoes[i].sold = false;
+
+      shoes.push(Shoe(msg.sender, " ", " ", false));
+
+      allShoes = allShoes + 1;
+
+    }
+  } 
+    
   }
   
   function buyShoe payable external (string _name, string _image) {
