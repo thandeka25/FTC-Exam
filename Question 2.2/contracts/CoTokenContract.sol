@@ -1,9 +1,14 @@
 pragma solidity ^0.5.0;
 
-//import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
-//import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/ownership/Ownable.sol";
+import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
+import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
+import "openzeppelin-solidity/contracts/math/SafeMath.sol";
+//import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol";
+//import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/ownership/Ownable.sol";
+
+//import "ERC20.sol";
+//import "Ownable.sol";
+//import "SafeMath.sol";
 
 
 contract CoToken is Ownable, ERC20 {
@@ -11,6 +16,10 @@ contract CoToken is Ownable, ERC20 {
     uint public tokenBuyPrice_;
     uint public tokenSellPrice_;
     uint public poolBalance; //the eth always available in the contract
+    //declare token variables
+    string public Name = "CoToken"; //name of token
+    string public Symbol = "COT";   //symbol of token
+    uint public Decimals = 0;  //number of decimals
 
     /**
     function buyPrice () public view returns(uint) {
@@ -62,7 +71,7 @@ contract CoToken is Ownable, ERC20 {
     function integralSellPrice (uint _n) public returns(uint) { //_n is the number of tokens requested
         uint Q0 = totsupply; //token supply before selling back to curve
         uint Q1 = totsupply - _n; //token supply after potential sell
-        tokenSellPrice_ = _integralFunction(Q1) - _integralFunctions(Q0);
+        tokenSellPrice_ = _integralFunction(Q1) - _integralFunction(Q0);
         return tokenSellPrice_;
     }
 
@@ -72,7 +81,7 @@ contract CoToken is Ownable, ERC20 {
     function burn(uint _n) public payable { //_n is the number of tokens requested
         require(poolBalance >= integralSellPrice (_n), "Funds not enugh to buy tokens"); //check if funds in contract are enough to sell
         totsupply = totsupply - _n;
-        poolBalance = _updatePoolBalancetotsupply;
+        poolBalance = _updatePoolBalance(totsupply);
     }
     function destroy () public onlyOwner {
         //require(totsupply[msg.sender] == 100, "owner does not have all the tokens"); //check that the owner is in possession of all the tokens

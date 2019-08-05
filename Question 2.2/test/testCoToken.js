@@ -5,7 +5,7 @@ contract('CoToken', function (accounts) {
   // predefine parameters
   let sellPrice = 0;
   let buyPrice ;
-  const totSupply ;
+  let totSupply ;
   //const songPrice = web3.utils.toWei('1', 'ether')
 
   it('should mint the number of tokens to be sold', async function () { 
@@ -36,5 +36,4 @@ contract('CoToken', function (accounts) {
     // check that there are no songs initially
     assert.equal(shoeCounter, 0, 'initial number not equal to zero')
   }),
-
 })
